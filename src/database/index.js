@@ -22,11 +22,14 @@ class Database {
   }
 
   mongo() {
-    this.mongoConncetion = mongoose.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
-      useFindAndModify: true,
-      useUnifiedTopology: true,
-    });
+    this.mongoConncetion = mongoose.connect(
+      'mongodb://localhost:27017/smartagenda',
+      {
+        useNewUrlParser: true,
+        useFindAndModify: true,
+        useUnifiedTopology: true,
+      }
+    );
   }
 }
 
