@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
-import multerConfig from '../src/config/multer';
+import multerConfig from './config/multer';
 import AppointmentController from './app/controllers/AppointmentController';
 import AvailableController from './app/controllers/AvailableController';
 import FileController from './app/controllers/FileController';
@@ -10,7 +10,6 @@ import ScheduleController from './app/controllers/ScheduleController';
 import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
 import authMiddleware from './app/middlewares/auth';
-
 
 const routes = new Router();
 const upload = multer(multerConfig);

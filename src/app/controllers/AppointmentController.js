@@ -1,4 +1,3 @@
-
 import { format, isBefore, parseISO, startOfHour, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import * as Yup from 'yup';
@@ -10,15 +9,13 @@ import User from '../models/User';
 import Notification from '../schemas/Notification';
 
 class AppointmentController {
-
   async index(req, res) {
     const { page = 1 } = req.query;
 
     const appointments = await Appointment.findAll({
-      where:
-      {
+      where: {
         user_id: req.userId,
-        canceled_at: null
+        canceled_at: null,
       },
       order: ['date'],
       attributes: ['id', 'date', 'past', 'cancelable'],
@@ -33,11 +30,11 @@ class AppointmentController {
             {
               model: File,
               as: 'avatar',
-              attributes: ['id', 'path', 'url']
+              attributes: ['id', 'path', 'url'],
             },
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     });
 
     return res.json(appointments);
@@ -57,11 +54,13 @@ class AppointmentController {
 
     // Check is provider_id is a provider
     const isProvider = await User.findOne({
-      where: { id: provider_id, provider: true }
-    })
+      where: { id: provider_id, provider: true },
+    });
 
     if (!isProvider) {
-      return res.status(401).json({ error: 'You can only appointments with provider' })
+      return res
+        .status(401)
+        .json({ error: 'You can only appointments with provider' });
     }
 
     // CHeck for past dates
@@ -77,11 +76,11 @@ class AppointmentController {
         provider_id,
         canceled_at: null,
         date: hourStart,
-      }
+      },
     });
 
     if (checkAvailability) {
-      return res.status(400).json({ error: 'Appointment is not available' })
+      return res.status(400).json({ error: 'Appointment is not available' });
     }
 
     const appointment = await Appointment.create({
@@ -95,19 +94,18 @@ class AppointmentController {
     const formattedDate = format(
       hourStart,
       "'dia' dd 'de' MMMM', às' H:mm'h'",
-      { locale: pt },
-    )
+      { locale: pt }
+    );
 
     await Notification.create({
       content: `Novo agendamento de ${user.name} para ${formattedDate}`,
       user: provider_id,
-    })
+    });
 
     return res.json(appointment);
   }
 
   async delete(req, res) {
-
     const appointment = await Appointment.findByPk(req.params.id, {
       include: [
         {
@@ -118,9 +116,9 @@ class AppointmentController {
         {
           model: User,
           as: 'user',
-          attributes: ['name', 'email']
-        }
-      ]
+          attributes: ['name', 'email'],
+        },
+      ],
     });
 
     if (appointment.user_id !== req.userId) {
@@ -142,12 +140,11 @@ class AppointmentController {
     await appointment.save();
 
     await Queue.add(CancellationMail.key, {
-      appointment
+      appointment,
     });
 
     return res.json(appointment);
   }
-
 }
 
 export default new AppointmentController();

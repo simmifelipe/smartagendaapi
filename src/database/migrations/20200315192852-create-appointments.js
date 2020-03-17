@@ -1,4 +1,3 @@
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('appointments', {
@@ -39,10 +38,9 @@ module.exports = {
         allowNull: false,
       },
     });
-
   },
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('appointments');
-  }
+  },
 };

@@ -1,9 +1,7 @@
-
 import { isBefore, setHours } from 'date-fns';
 import Sequelize, { Model } from 'sequelize';
 
 class Appointment extends Model {
-
   static init(sequelize) {
     super.init(
       {
@@ -13,14 +11,14 @@ class Appointment extends Model {
           type: Sequelize.VIRTUAL,
           get() {
             return isBefore(this.date, new Date());
-          }
+          },
         },
         cancelable: {
           type: Sequelize.VIRTUAL,
           get() {
             return isBefore(new Date(), setHours(this.date, 2));
-          }
-        }
+          },
+        },
       },
       {
         sequelize,

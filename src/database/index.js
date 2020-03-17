@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 import Sequelize from 'sequelize';
 import Appointment from '../app/models/Appointment';
@@ -6,11 +5,9 @@ import File from '../app/models/File';
 import User from '../app/models/User';
 import databaseConfig from '../config/database';
 
-
 const models = [User, File, Appointment];
 
 class Database {
-
   constructor() {
     this.init();
     this.mongo();
@@ -25,14 +22,12 @@ class Database {
   }
 
   mongo() {
-    this.mongoConncetion = mongoose.connect(
-      process.env.MONGO_URL,
-      { useNewUrlParser: true, useFindAndModify: true, useUnifiedTopology: true },
-    )
+    this.mongoConncetion = mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useFindAndModify: true,
+      useUnifiedTopology: true,
+    });
   }
-
-
-
 }
 
 export default new Database();

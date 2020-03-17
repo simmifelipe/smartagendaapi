@@ -1,19 +1,19 @@
 import { endOfDay, parseISO, startOfDay } from 'date-fns';
 import { Op } from 'sequelize';
-import Appointment from "../models/Appointment";
-import User from "../models/User";
+import Appointment from '../models/Appointment';
+import User from '../models/User';
 
 class ScheduleController {
-
   async index(req, res) {
     const checkUserProvider = await User.findOne({
       where: {
-        id: req.userId, provider: true,
-      }
+        id: req.userId,
+        provider: true,
+      },
     });
 
     if (!checkUserProvider) {
-      return res.status(401).json({ error: 'User is not provider' })
+      return res.status(401).json({ error: 'User is not provider' });
     }
 
     const { date } = req.query;
@@ -24,16 +24,14 @@ class ScheduleController {
         provider_id: req.userId,
         canceled_at: null,
         date: {
-          [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)]
+          [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)],
         },
       },
       order: ['date'],
-    })
+    });
 
     return res.json(appointments);
   }
-
-
 }
 
 export default new ScheduleController();
