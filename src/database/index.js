@@ -1,3 +1,4 @@
+
 import mongoose from 'mongoose';
 import Sequelize from 'sequelize';
 import Appointment from '../app/models/Appointment';
@@ -25,7 +26,7 @@ class Database {
 
   mongo() {
     this.mongoConncetion = mongoose.connect(
-      'mongodb://localhost:27017/smartagenda',
+      process.env.MONGO_URL,
       { useNewUrlParser: true, useFindAndModify: true, useUnifiedTopology: true },
     )
   }
