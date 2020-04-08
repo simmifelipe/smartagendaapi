@@ -1,7 +1,7 @@
-import { Op } from "sequelize";
-import { parseISO } from "date-fns";
+import { Op } from 'sequelize';
+import { parseISO } from 'date-fns';
 
-import Service from "../models/Service";
+import Service from '../models/Service';
 
 class ServiceController {
   // Lista os Services
@@ -87,7 +87,7 @@ class ServiceController {
     }
 
     if (sort) {
-      order = sort.split(",").map(item => item.split(":"));
+      order = sort.split(',').map(item => item.split(':'));
     }
 
     const data = await Service.findAll({
