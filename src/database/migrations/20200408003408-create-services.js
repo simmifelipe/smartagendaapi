@@ -11,10 +11,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      tempo_prev: {
+      expected_duration: {
         type: Sequelize.INTEGER,
       },
-      valor: {
+      amount: {
         type: Sequelize.DOUBLE,
       },
       user_id: {
