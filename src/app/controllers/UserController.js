@@ -54,6 +54,10 @@ class UserController {
 
     const { email, oldPassword } = req.body;
 
+    if (!email || email === '') {
+      return res.status(400).json({ error: 'E-mail cannot be empty.' });
+    }
+
     const user = await User.findByPk(req.userId);
 
     if (email && email !== user.email) {
@@ -65,7 +69,7 @@ class UserController {
     }
 
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
-      return res.status(401).json({ error: 'Pssword does not match.' });
+      return res.status(401).json({ error: 'Password does not match.' });
     }
 
     await user.update(req.body);
