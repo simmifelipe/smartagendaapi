@@ -5,8 +5,8 @@ class Service extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        tempo_prev: Sequelize.INTEGER,
-        valor: Sequelize.DOUBLE,
+        expected_duration: Sequelize.INTEGER,
+        amount: Sequelize.DOUBLE,
       },
       {
         sequelize,

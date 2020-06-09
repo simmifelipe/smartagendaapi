@@ -3,6 +3,7 @@ import multer from 'multer';
 import multerConfig from './config/multer';
 import AppointmentController from './app/controllers/AppointmentController';
 import ServiceController from './app/controllers/ServiceController';
+import ServiceTypeController from './app/controllers/ServiceTypeController';
 import AvailableController from './app/controllers/AvailableController';
 import FileController from './app/controllers/FileController';
 import NotificationController from './app/controllers/NotificationController';
@@ -29,6 +30,12 @@ routes.put('/services/:id', ServiceController.update);
 routes.get('/services', ServiceController.index);
 routes.get('/services/:id', ServiceController.show);
 routes.delete('/services/:id', ServiceController.delete);
+
+routes.post('/service_types', ServiceTypeController.store);
+routes.put('/service_types/:id', ServiceTypeController.update);
+routes.get('/service_types', ServiceTypeController.index);
+routes.get('/service_types/:id', ServiceTypeController.show);
+routes.delete('/service_types/:id', ServiceTypeController.delete);
 
 routes.post('/appointments', AppointmentController.store);
 routes.get('/appointments', AppointmentController.index);
