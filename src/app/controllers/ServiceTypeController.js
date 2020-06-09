@@ -76,6 +76,7 @@ class ServiceTypeController {
       limit,
       offset: limit * page - limit,
     });
+
     return res.json(data);
   }
 

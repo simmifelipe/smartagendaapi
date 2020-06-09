@@ -31,11 +31,11 @@ routes.get('/services', ServiceController.index);
 routes.get('/services/:id', ServiceController.show);
 routes.delete('/services/:id', ServiceController.delete);
 
-routes.post('/service_types', ServiceTypeController.store);
-routes.put('/service_types/:id', ServiceTypeController.update);
-routes.get('/service_types', ServiceTypeController.index);
-routes.get('/service_types/:id', ServiceTypeController.show);
-routes.delete('/service_types/:id', ServiceTypeController.delete);
+routes.post('/servicetypes', ServiceTypeController.store);
+routes.put('/servicetypes/:id', ServiceTypeController.update);
+routes.get('/servicetypes', ServiceTypeController.index);
+routes.get('/servicetypes/:id', ServiceTypeController.show);
+routes.delete('/servicetypes/:id', ServiceTypeController.delete);
 
 routes.post('/appointments', AppointmentController.store);
 routes.get('/appointments', AppointmentController.index);
